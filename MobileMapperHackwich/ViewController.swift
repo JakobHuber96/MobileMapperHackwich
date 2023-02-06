@@ -12,12 +12,12 @@ import MapKit
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 var currentLocation: CLLocation!
     var initialRegion:MKCoordinateRegion!
-    var isIntitialMapLoad: Bool = true
+    var isInitialMapLoad: Bool = true
     var parks: [MKMapItem] = []
     
     
     let locationManager = CLLocationManager()
-    ///Mark: ViewDidLoad
+    //MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
@@ -29,7 +29,7 @@ var currentLocation: CLLocation!
         mapView.delegate = self
         
         }
-   ///Mark: ViewDidclose
+   //MARK: ViewDidclose
    
     
     @IBAction func whenZoomButtonPressed(_ sender: Any) {
@@ -118,6 +118,14 @@ var currentLocation: CLLocation!
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+       
+        let buttonPressed = control as! UIButton
+        if buttonPressed.buttonType == .contactAdd {
+            mapView.setRegion(initialRegion, animated: true)
+            return
+        }
+        
+        
         var currentMapItem = MKMapItem(
             
         )
@@ -148,7 +156,13 @@ var currentLocation: CLLocation!
         
     }
    
-//mapview
+    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
+        if isInitialMapLoad{
+            initialRegion = MKCoordinateRegion(center:mapView.centerCoordinate, span: mapView.region.span)
+            isInitialMapLoad = false
+        }
+        
+    }
     
     
 }
