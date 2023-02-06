@@ -9,15 +9,15 @@ import UIKit
 import MapKit
 
 
-
-
-
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 var currentLocation: CLLocation!
- 
+    var initialRegion:MKCoordinateRegion!
+    var isIntitialMapLoad: Bool = true
+    var parks: [MKMapItem] = []
     
     
     let locationManager = CLLocationManager()
+    ///Mark: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
@@ -28,8 +28,9 @@ var currentLocation: CLLocation!
         mapView.showsUserLocation = true
         mapView.delegate = self
         
-    }
-    var parks: [MKMapItem] = []
+        }
+   ///Mark: ViewDidclose
+   
     
     @IBAction func whenZoomButtonPressed(_ sender: Any) {
         let coordinateSpan = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
@@ -80,16 +81,16 @@ var currentLocation: CLLocation!
 
         let placemark = currentMapItem.placemark
         print(currentMapItem)
-        if let parkName = placemark.name, let streetNumber = placemark.subThoroughfare, let streetName =
-            placemark.thoroughfare
-        {
-
-            let streetAddress = streetNumber + " " + streetName
-
-            let alert = UIAlertController(title: parkName, message: streetAddress, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-        }
+//        if let parkName = placemark.name, let streetNumber = placemark.subThoroughfare, let streetName =
+//            placemark.thoroughfare
+//        {
+//
+//           let streetAddress = streetNumber + " " + streetName
+//
+//            let alert = UIAlertController(title: parkName, message: streetAddress, preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//            present(alert, animated: true, completion: nil)
+//        }
         var pin = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
         if let title = annotation.title, let actualTitle = title {
             if actualTitle == "Twin Silo Park" { //This name depends on where you set simulator location
@@ -108,11 +109,46 @@ var currentLocation: CLLocation!
             return nil
        
         }
+        let zoomButton = UIButton(type: .contactAdd
+        )
+        pin.leftCalloutAccessoryView = zoomButton
+        
+        
         return pin
     }
     
-    
-    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        var currentMapItem = MKMapItem(
+            
+        )
+        
+        if let coordinate = view.annotation?.coordinate{
+            for mapitem in parks {
+                if mapitem.placemark.coordinate.latitude == coordinate.latitude &&
+                    mapitem.placemark.coordinate.longitude == coordinate.longitude {
+                    currentMapItem = mapitem
+                }
+                
+            }
+            
+        }
+        let placemark = currentMapItem.placemark
+        print(currentMapItem)
+       if let parkName = placemark.name, let streetNumber = placemark.subThoroughfare, let streetName = placemark.thoroughfare{
+            let streetAdress = streetNumber + " " + streetName
+            let alert = UIAlertController (title: parkName , message: streetAdress, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
+            present (alert, animated: true, completion: nil)
+
+
+        }
+            
+        
+        
+        
+    }
+   
+//mapview
     
     
 }
