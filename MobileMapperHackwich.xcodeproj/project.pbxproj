@@ -49,6 +49,7 @@
 		6B1AFCE729882CA400F55A6D /* MobileMapperHackwichUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobileMapperHackwichUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B1AFCEB29882CA400F55A6D /* MobileMapperHackwichUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileMapperHackwichUITests.swift; sourceTree = "<group>"; };
 		6B1AFCED29882CA400F55A6D /* MobileMapperHackwichUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileMapperHackwichUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6B4602F4298C243C0048D10B /* 02-Feb-2023-1002.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "02-Feb-2023-1002.gpx"; path = "../../../Desktop/02-Feb-2023-1002.gpx"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +80,7 @@
 		6B1AFCBE29882CA100F55A6D = {
 			isa = PBXGroup;
 			children = (
+				6B4602F4298C243C0048D10B /* 02-Feb-2023-1002.gpx */,
 				6B1AFCC929882CA100F55A6D /* MobileMapperHackwich */,
 				6B1AFCE029882CA400F55A6D /* MobileMapperHackwichTests */,
 				6B1AFCEA29882CA400F55A6D /* MobileMapperHackwichUITests */,
